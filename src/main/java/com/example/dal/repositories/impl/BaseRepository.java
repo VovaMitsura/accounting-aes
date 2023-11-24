@@ -8,12 +8,11 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 
 @RequiredArgsConstructor
-public class BaseRepository<T> implements IRepository<T, UUID> {
+public class BaseRepository<T, U> implements IRepository<T, U> {
 
   private final EntityManagerUtil entityManagerUtil;
 
@@ -24,7 +23,7 @@ public class BaseRepository<T> implements IRepository<T, UUID> {
   }
 
   @Override
-  public Optional<T> findById(UUID id) {
+  public Optional<T> findById(U id) {
     Class<T> actualTypeArgument = getActualTypeArgument();
     return entityManagerUtil.performReturningWithinTx(
             entityManager -> Optional.ofNullable(entityManager.find(actualTypeArgument, id)));
