@@ -1,9 +1,7 @@
 package com.example.dal.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.List;
@@ -15,6 +13,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Department {
 
   @Id
