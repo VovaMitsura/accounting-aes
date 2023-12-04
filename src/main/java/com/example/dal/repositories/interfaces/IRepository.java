@@ -9,7 +9,7 @@ public interface IRepository<T, U> {
   void save(T obj);
 
   Optional<T> findById(U id);
-  Optional<T> findByPredicate(T obj, Predicate<T> predicate);
+  Optional<T> findByPredicate(Predicate<T> predicate);
 
   List<T> findAll();
 

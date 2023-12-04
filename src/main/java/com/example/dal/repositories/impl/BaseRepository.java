@@ -30,7 +30,7 @@ public class BaseRepository<T, U> implements IRepository<T, U> {
   }
 
   @Override
-  public Optional<T> findByPredicate(T obj, Predicate<T> predicate) {
+  public Optional<T> findByPredicate(Predicate<T> predicate) {
     Class<T> actualTypeArgument = getActualTypeArgument();
     return entityManagerUtil.performReturningWithinTx(
             entityManager -> entityManager.createQuery("from " + actualTypeArgument.getName(), actualTypeArgument)
