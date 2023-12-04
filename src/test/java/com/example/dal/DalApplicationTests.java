@@ -41,7 +41,7 @@ class DalApplicationTests {
     var addressesRepo = unitOfWork.getAddressRepository();
     var addresses = addressesRepo.findAll();
     Predicate<Address> predicate = address -> address.getCity().equals("Sumy");
-    var optionalAddress = addressesRepo.findByPredicate(addresses.get(0), predicate);
+    var optionalAddress = addressesRepo.findByPredicate(predicate);
     Assertions.assertTrue(optionalAddress.isPresent());
   }
 
