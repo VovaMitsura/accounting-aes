@@ -31,7 +31,6 @@ public class DepartmentService implements IDepartmentService {
             toList();
 
     if (!(
-            userRoles.contains(Role.ADMIN) ||
             userRoles.contains(Role.HEAD_OF_DEPARTMENT) ||
             userRoles.contains(Role.ACCOUNTANT)))
       throw new SecurityException("User is not authorized to perform this action");

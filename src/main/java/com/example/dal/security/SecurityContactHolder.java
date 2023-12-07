@@ -2,7 +2,7 @@ package com.example.dal.security;
 
 public class SecurityContactHolder {
 
-  private static final SecurityContext securityContext;
+  private static SecurityContext securityContext;
 
   static {
     securityContext = new SecurityContextImpl();
@@ -10,6 +10,10 @@ public class SecurityContactHolder {
 
   public static SecurityContext getContext() {
     return securityContext;
+  }
+
+  public static void setContext(SecurityContext context) {
+    securityContext = context;
   }
 
 }
