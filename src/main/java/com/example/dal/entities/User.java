@@ -1,12 +1,13 @@
 package com.example.dal.entities;
 
+import com.example.dal.security.identity.GrantedAuthority;
+import com.example.dal.security.identity.SimpleGrantedAuthority;
+import com.example.dal.security.identity.UserDetails;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +17,7 @@ import java.util.UUID;
 @ToString
 @Builder
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -40,7 +41,10 @@ public class User {
   private String password;
 
   @Column(name = "date_of_emploment")
-  private Date dateOfEmploment;
+  private Date dateOfEmployment;
+
+  @Column(name = "enabled")
+  private Boolean enabled;
 
   @ManyToOne
   @JoinColumn(name = "department_id")
@@ -61,11 +65,14 @@ public class User {
   public final int hashCode() {
     return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
   }
-}
 
-enum Role {
-  ADMIN,
-  HEAD_OF_DEPARTMENT,
-  ACCOUNTANT,
-  GENERAL_EMPLOYEE,
+  @Override
+  public Collection<? extends GrantedAuthority> getUserAuthorities() {
+    return List.of(new SimpleGrantedAuthority(role.toString()));
+  }
+
+  @Override
+  public Boolean isEnabled() {
+    return enabled;
+  }
 }
